@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JTGeats | Home</title>
+  <style>
+    /* Reset + Global */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00c26e 0%, #2dd87a 100%);
+      color: white;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    header {
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.8;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .search-icon, .cart-icon {
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .search-icon:hover, .cart-icon:hover {
+      opacity: 0.8;
+    }
+
+    .search-icon svg, .cart-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 80px;
+      gap: 60px;
+    }
+
+    .hero-left {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .hero-left h1 {
+      font-size: 48px;
+      font-weight: bold;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero-left h1 span {
+      display: block;
+      margin-top: 5px;
+    }
+
+    .hero-left p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 400px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 15px 20px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .search-box input::placeholder {
+      color: #999;
+    }
+
+    .search-box button {
+      background-color: #ffa500;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-box button:hover {
+      background-color: #e6940a;
+    }
+
+    /* Hero Image */
+    .hero-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-right svg {
+      max-width: 500px;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Home Kitchen Section */
+    .home-kitchen {
+      background-color: #f8f9fa;
+      color: #333;
+      padding: 60px 40px;
+    }
+
+    .home-kitchen h2 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .pizza-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pizza-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .pizza-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .pizza-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      position: relative;
+    }
+
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ffa500;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .pizza-info {
+      padding: 16px;
+    }
+
+    .pizza-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .pizza-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pizza-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .star {
+      color: #ffa500;
+      font-size: 12px;
+    }
+
+    .pizza-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .add-btn {
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-btn:hover {
+      background-color: #e6940a;
+    }
+
+    /* Popular Items Section */
+    .popular-items {
+      background-color: #f8f9fa;
+      color: #333;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .popular-items h2 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .carousel-wrapper {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item {
+      min-width: 300px;
+      margin: 0 15px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .carousel-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .carousel-item.center {
+      transform: scale(1.05);
+      z-index: 2;
+    }
+
+    .carousel-item.center:hover {
+      transform: scale(1.05) translateY(-8px);
+    }
+
+    .item-image {
+      width: 100%;
+      height: 200px;
+      position: relative;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #00c26e;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      z-index: 3;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .carousel-nav:hover {
+      background-color: #00a85c;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-nav.prev {
+      left: -25px;
+    }
+
+    .carousel-nav.next {
+      right: -25px;
+    }
+
+    .item-info {
+      padding: 20px;
+    }
+
+    .item-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .item-price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .qty-btn {
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-display {
+      background-color: #f0f0f0;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .request-dish-btn {
+      background-color: #00c26e;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 40px;
+      transition: background-color 0.3s ease;
+    }
+
+    .request-dish-btn:hover {
+      background-color: #00a85c;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .modal h3 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #00c26e;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 30px;
+    }
+
+    .btn-cancel {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .btn-submit {
+      background-color: #00c26e;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .btn-cancel:hover {
+      background-color: #5a6268;
+    }
+
+    .btn-submit:hover {
+      background-color: #00a85c;
+    }
+
+    /* Body scroll lock */
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+      }
+      
+      .hero-left {
+        max-width: 100%;
+        margin-bottom: 40px;
+      }
+      
+      .hero-left h1 {
+        font-size: 36px;
+      }
+      
+      .search-box {
+        width: 100%;
+        max-width: 400px;
+      }
+      
+      .nav-container {
+        padding: 0 20px;
+      }
+      
+      .nav-links {
+        gap: 20px;
+      }
+
+      .home-kitchen {
+        padding: 40px 20px;
+      }
+
+      .pizza-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .popular-items {
+        padding: 40px 20px;
+      }
+
+      .carousel-item {
+        min-width: 280px;
+      }
+
+      .carousel-nav {
+        display: none;
+      }
+
+      .modal {
+        width: 95%;
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">JTGeats</div>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Menu</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="nav-icons">
+        <div class="search-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+        </div>
+        <div class="cart-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="hero-left">
+      <h1>Authentic Home<br><span>food in India</span></h1>
+      <p>JTGeats is a courier service in which authentic home cook food is delivered to a customer.</p>
+      <div class="search-box">
+        <input type="text" placeholder="Search food you love" />
+        <button>Search</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Kitchen Background -->
+        <rect x="200" y="50" width="250" height="200" fill="#f0f0f0" rx="10"/>
+        <rect x="210" y="60" width="230" height="20" fill="#e0e0e0"/>
+        
+        <!-- Kitchen Counter -->
+        <rect x="180" y="200" width="290" height="30" fill="#8B4513"/>
+        
+        <!-- Kitchen Tools -->
+        <g transform="translate(400,80)">
+          <!-- Spatula -->
+          <rect x="10" y="0" width="3" height="60" fill="#8B4513"/>
+          <ellipse cx="11.5" cy="5" rx="8" ry="5" fill="#C0C0C0"/>
+          
+          <!-- Whisk -->
+          <rect x="25" y="0" width="3" height="60" fill="#8B4513"/>
+          <g stroke="#C0C0C0" stroke-width="1" fill="none">
+            <path d="M20,8 Q26,3 32,8"/>
+            <path d="M20,12 Q26,7 32,12"/>
+            <path d="M20,16 Q26,11 32,16"/>
+          </g>
+          
+          <!-- Ladle -->
+          <rect x="40" y="10" width="3" height="50" fill="#8B4513"/>
+          <circle cx="41.5" cy="8" r="8" fill="#C0C0C0"/>
+        </g>
+        
+        <!-- Person -->
+        <g transform="translate(250,120)">
+          <!-- Head -->
+          <circle cx="50" cy="30" r="18" fill="#FDBCB4"/>
+          
+          <!-- Hair -->
+          <path d="M32,25 Q50,15 68,25 Q68,35 32,35 Z" fill="#4A4A4A"/>
+          
+          <!-- Eyes -->
+          <circle cx="45" cy="28" r="2" fill="#000"/>
+          <circle cx="55" cy="28" r="2" fill="#000"/>
+          
+          <!-- Smile -->
+          <path d="M45,35 Q50,40 55,35" stroke="#000" stroke-width="1.5" fill="none"/>
+          
+          <!-- Body -->
+          <rect x="35" y="45" width="30" height="40" fill="#4CAF50" rx="15"/>
+          
+          <!-- Apron -->
+          <rect x="38" y="50" width="24" height="35" fill="#FFF" rx="5"/>
+          <rect x="45" y="45" width="10" height="5" fill="#FFF"/>
+          
+          <!-- Arms -->
+          <ellipse cx="25" cy="60" rx="8" ry="20" fill="#FDBCB4"/>
+          <ellipse cx="75" cy="65" rx="8" ry="18" fill="#FDBCB4"/>
+          
+          <!-- Hands -->
+          <circle cx="25" cy="75" r="6" fill="#FDBCB4"/>
+          <circle cx="75" cy="80" r="6" fill="#FDBCB4"/>
+          
+          <!-- Cooking Pan -->
+          <g transform="translate(65,75)">
+            <ellipse cx="10" cy="5" rx="15" ry="8" fill="#2C2C2C"/>
+            <rect x="20" y="3" width="15" height="3" fill="#8B4513"/>
+            <!-- Food in pan -->
+            <ellipse cx="10" cy="3" rx="8" ry="4" fill="#FF6B35"/>
+          </g>
+        </g>
+        
+        <!-- Cooking ingredients/items on counter -->
+        <g transform="translate(200,230)">
+          <!-- Bowl -->
+          <ellipse cx="30" cy="20" rx="15" ry="8" fill="#FFF"/>
+          <ellipse cx="30" cy="18" rx="12" ry="6" fill="#FFD700"/>
+          
+          <!-- Bottle -->
+          <rect x="70" y="5" width="8" height="25" fill="#4CAF50" rx="4"/>
+          <rect x="72" y="0" width="4" height="8" fill="#4CAF50"/>
+          
+          <!-- Salt/Spice containers -->
+          <rect x="100" y="10" width="6" height="15" fill="#FF9800" rx="3"/>
+          <rect x="110" y="8" width="6" height="17" fill="#F44336" rx="3"/>
+        </g>
+        
+        <!-- Steam lines -->
+        <g stroke="#FFF" stroke-width="2" fill="none" opacity="0.6">
+          <path d="M320,195 Q322,185 320,175">
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <path d="M325,195 Q327,185 325,175">
+            <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <path d="M330,195 Q332,185 330,175">
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+          </path>
+        </g>
+      </svg>
+    </div>
+  </main>
+
+  <section class="home-kitchen">
+    <h2>Home Kitchen</h2>
+    <div class="pizza-grid">
+      <!-- Row 1 -->
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#8B4513"/>
+            <circle cx="140" cy="100" r="80" fill="#FFD700"/>
+            <circle cx="120" cy="80" r="8" fill="#FF6347"/>
+            <circle cx="160" cy="90" r="6" fill="#32CD32"/>
+            <circle cx="130" cy="120" r="7" fill="#FF4500"/>
+            <circle cx="150" cy="110" r="5" fill="#228B22"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(30-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#D2691E"/>
+            <circle cx="140" cy="100" r="80" fill="#F5DEB3"/>
+            <circle cx="125" cy="85" r="6" fill="#FF0000"/>
+            <circle cx="155" cy="95" r="5" fill="#000"/>
+            <circle cx="135" cy="115" r="7" fill="#FF6347"/>
+            <circle cx="150" cy="120" r="4" fill="#FFF"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹123</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <div class="discount-badge">40%</div>
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#654321"/>
+            <circle cx="140" cy="100" r="80" fill="#FFD700"/>
+            <circle cx="110" cy="75" r="8" fill="#FF6347"/>
+            <circle cx="170" cy="85" r="6" fill="#32CD32"/>
+            <circle cx="120" cy="125" r="7" fill="#FF4500"/>
+            <circle cx="160" cy="115" r="6" fill="#228B22"/>
+            <circle cx="140" cy="95" r="5" fill="#8B0000"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#8B4513"/>
+            <circle cx="140" cy="100" r="80" fill="#F5DEB3"/>
+            <circle cx="120" cy="80" r="6" fill="#8B0000"/>
+            <circle cx="160" cy="90" r="7" fill="#FFF"/>
+            <circle cx="130" cy="120" r="5" fill="#000"/>
+            <circle cx="150" cy="110" r="6" fill="#FF6347"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <div class="discount-badge">30%</div>
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#CD853F"/>
+            <circle cx="140" cy="100" r="80" fill="#FFD700"/>
+            <circle cx="115" cy="75" r="7" fill="#FF6347"/>
+            <circle cx="165" cy="85" r="6" fill="#32CD32"/>
+            <circle cx="125" cy="125" r="8" fill="#FF4500"/>
+            <circle cx="155" cy="115" r="5" fill="#FFF"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹19</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <div class="discount-badge">30%</div>
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#8B4513"/>
+            <circle cx="140" cy="100" r="80" fill="#228B22"/>
+            <circle cx="120" cy="80" r="6" fill="#FFF"/>
+            <circle cx="160" cy="90" r="7" fill="#FF6347"/>
+            <circle cx="130" cy="120" r="5" fill="#FFD700"/>
+            <circle cx="150" cy="110" r="6" fill="#32CD32"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <div class="discount-badge">40%</div>
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#A0522D"/>
+            <circle cx="140" cy="100" r="80" fill="#FFD700"/>
+            <circle cx="110" cy="70" r="8" fill="#FF6347"/>
+            <circle cx="170" cy="80" r="6" fill="#8B4513"/>
+            <circle cx="120" cy="130" r="7" fill="#32CD32"/>
+            <circle cx="160" cy="120" r="5" fill="#FF4500"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <div class="discount-badge">50%</div>
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#D2691E"/>
+            <circle cx="140" cy="100" r="80" fill="#FF4500"/>
+            <g stroke="#8B0000" stroke-width="8" fill="none">
+              <path d="M 80 100 L 200 100"/>
+              <path d="M 140 40 L 140 160"/>
+              <path d="M 105 65 L 175 135"/>
+              <path d="M 175 65 L 105 135"/>
+            </g>
+            <circle cx="115" cy="75" r="4" fill="#FFF"/>
+            <circle cx="165" cy="85" r="5" fill="#FFF"/>
+            <circle cx="125" cy="125" r="4" fill="#FFF"/>
+            <circle cx="155" cy="115" r="5" fill="#FFF"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#8B4513"/>
+            <circle cx="140" cy="100" r="80" fill="#FFD700"/>
+            <circle cx="120" cy="80" r="8" fill="#FF6347"/>
+            <circle cx="160" cy="90" r="6" fill="#32CD32"/>
+            <circle cx="130" cy="120" r="7" fill="#FF4500"/>
+            <circle cx="150" cy="110" r="5" fill="#228B22"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹19</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#D2691E"/>
+            <circle cx="140" cy="100" r="80" fill="#F5DEB3"/>
+            <circle cx="125" cy="85" r="6" fill="#FF0000"/>
+            <circle cx="155" cy="95" r="5" fill="#000"/>
+            <circle cx="135" cy="115" r="7" fill="#FF6347"/>
+            <circle cx="150" cy="120" r="4" fill="#FFF"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <div class="discount-badge">40%</div>
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#654321"/>
+            <circle cx="140" cy="100" r="80" fill="#FFD700"/>
+            <circle cx="110" cy="75" r="8" fill="#FF6347"/>
+            <circle cx="170" cy="85" r="6" fill="#32CD32"/>
+            <circle cx="120" cy="125" r="7" fill="#FF4500"/>
+            <circle cx="160" cy="115" r="6" fill="#228B22"/>
+            <circle cx="140" cy="95" r="5" fill="#8B0000"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div style="position: relative;">
+          <svg class="pizza-image" viewBox="0 0 280 200" style="height: 200px;">
+            <rect width="280" height="200" fill="#8B4513"/>
+            <circle cx="140" cy="100" r="80" fill="#F5DEB3"/>
+            <circle cx="120" cy="80" r="6" fill="#8B0000"/>
+            <circle cx="160" cy="90" r="7" fill="#FFF"/>
+            <circle cx="130" cy="120" r="5" fill="#000"/>
+            <circle cx="150" cy="110" r="6" fill="#FF6347"/>
+            <path d="M 140 20 L 220 100 L 140 180 L 60 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+            <path d="M 140 20 L 140 180 M 60 100 L 220 100" stroke="#8B4513" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="pizza-info">
+          <div class="pizza-title">Home made pizza</div>
+          <div class="pizza-footer">
+            <div class="pizza-rating">
+              <span class="star">★</span>
+              <span>4.7</span>
+              <span>(50-70 min)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pizza-price">₹190</span>
+              <button class="add-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="popular-items">
+    <h2>Popular Items</h2>
+    <div class="carousel-container">
+      <button class="carousel-nav prev" onclick="moveCarousel(-1)">‹</button>
+      <div class="carousel-wrapper" id="carousel">
+        <div class="carousel-item center">
+          <div class="item-image">
+            <svg viewBox="0 0 300 200" style="width: 100%; height: 200px;">
+              <rect width="300" height="200" fill="#8B4513"/>
+              <circle cx="150" cy="100" r="80" fill="#FFD700"/>
+              <circle cx="130" cy="80" r="8" fill="#FF6347"/>
+              <circle cx="170" cy="90" r="6" fill="#32CD32"/>
+              <circle cx="140" cy="120" r="7" fill="#FF4500"/>
+              <circle cx="160" cy="110" r="5" fill="#228B22"/>
+              <path d="M 150 20 L 230 100 L 150 180 L 70 100 Z" fill="none" stroke="#8B4513" stroke-width="2"/>
+              <path d="M 150 20 L 150 180 M 70 100 L 230 100" stroke="#8B4513" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="item-info">
+            <div class="item-title">Home made pizza</div>
+            <div class="item-footer">
+              <div class="item-rating">
+                <span class="star">★</span>
+                <span>4.7</span>
+                <span>(30-70 min)</span>
+              </div>
+              <span class="item-price">₹190</span>
+            </div>
+            <div class="quantity-controls">
+              <button class="qty-btn" onclick="changeQuantity(0, -1)">−</button>
+              <div class="qty-display" id="qty-0">1</div>
+              <button class="qty-btn" onclick="changeQuantity(0, 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="item-image">
+            <div class="discount-badge">30%</div>
+            <svg viewBox="0 0 300 200" style="width: 100%; height: 200px;">
+              <rect width="300" height="200" fill="#8B4513"/>
+              <ellipse cx="150" cy="100" rx="90" ry="60" fill="#D2691E"/>
+              <ellipse cx="130" cy="80" rx="12" ry="8" fill="#CD853F"/>
+              <ellipse cx="170" cy="90" rx="10" ry="6" fill="#F4A460"/>
+              <ellipse cx="140" cy="120" rx="14" ry="9" fill="#DEB887"/>
+              <ellipse cx="160" cy="110" rx="8" ry="5" fill="#D2691E"/>
+              <circle cx="135" cy="85" r="3" fill="#FF6347"/>
+              <circle cx="165" cy="95" r="2" fill="#32CD32"/>
+            </svg>
+          </div>
+          <div class="item-info">
+            <div class="item-title">Tandoori Chicken</div>
+            <div class="item-footer">
+              <div class="item-rating">
+                <span class="star">★</span>
+                <span>4.3</span>
+                <span>(15-20 min)</span>
+              </div>
+              <span class="item-price">₹184</span>
+            </div>
+            <div class="quantity-controls">
+              <button class="qty-btn" onclick="changeQuantity(1, -1)">−</button>
+              <div class="qty-display" id="qty-1">1</div>
+              <button class="qty-btn" onclick="changeQuantity(1, 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="item-image">
+            <div class="discount-badge">20%</div>
+            <svg viewBox="0 0 300 200" style="width: 100%; height: 200px;">
+              <rect width="300" height="200" fill="#A0522D"/>
+              <g>
+                <ellipse cx="130" cy="90" rx="15" ry="12" fill="#CD853F"/>
+                <ellipse cx="170" cy="100" rx="18" ry="14" fill="#D2691E"/>
+                <ellipse cx="150" cy="120" rx="16" ry="13" fill="#F4A460"/>
+                <ellipse cx="120" cy="130" rx="14" ry="11" fill="#DEB887"/>
+                <ellipse cx="180" cy="130" rx="17" ry="12" fill="#CD853F"/>
+              </g>
+              <circle cx="125" cy="85" r="2" fill="#FF0000"/>
+              <circle cx="175" cy="95" r="2" fill="#32CD32"/>
+              <circle cx="155" cy="115" r="2" fill="#FF6347"/>
+            </svg>
+          </div>
+          <div class="item-info">
+            <div class="item-title">Chilli Chicken</div>
+            <div class="item-footer">
+              <div class="item-rating">
+                <span class="star">★</span>
+                <span>4.1</span>
+                <span>(25-40 min)</span>
+              </div>
+              <span class="item-price">₹116</span>
+            </div>
+            <div class="quantity-controls">
+              <button class="qty-btn" onclick="changeQuantity(2, -1)">−</button>
+              <div class="qty-display" id="qty-2">1</div>
+              <button class="qty-btn" onclick="changeQuantity(2, 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="item-image">
+            <svg viewBox="0 0 300 200" style="width: 100%; height: 200px;">
+              <rect width="300" height="200" fill="#8FBC8F"/>
+              <ellipse cx="150" cy="100" rx="80" ry="50" fill="#228B22"/>
+              <circle cx="130" cy="80" r="8" fill="#FFD700"/>
+              <circle cx="170" cy="90" r="6" fill="#FFF"/>
+              <circle cx="140" cy="120" r="7" fill="#FF6347"/>
+              <circle cx="160" cy="110" r="5" fill="#32CD32"/>
+              <rect x="140" y="90" width="20" height="20" fill="#8B4513"/>
+            </svg>
+          </div>
+          <div class="item-info">
+            <div class="item-title">Palak Paneer</div>
+            <div class="item-footer">
+              <div class="item-rating">
+                <span class="star">★</span>
+                <span>4.5</span>
+                <span>(20-30 min)</span>
+              </div>
+              <span class="item-price">₹150</span>
+            </div>
+            <div class="quantity-controls">
+              <button class="qty-btn" onclick="changeQuantity(3, -1)">−</button>
+              <div class="qty-display" id="qty-3">1</div>
+              <button class="qty-btn" onclick="changeQuantity(3, 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="item-image">
+            <div class="discount-badge">25%</div>
+            <svg viewBox="0 0 300 200" style="width: 100%; height: 200px;">
+              <rect width="300" height="200" fill="#DEB887"/>
+              <ellipse cx="150" cy="100" rx="70" ry="40" fill="#F5DEB3"/>
+              <rect x="130" y="80" width="40" height="40" fill="#FFD700" rx="5"/>
+              <circle cx="125" cy="75" r="3" fill="#32CD32"/>
+              <circle cx="175" cy="85" r="4" fill="#FF6347"/>
+              <circle cx="140" cy="130" r="3" fill="#8B4513"/>
+            </svg>
+          </div>
+          <div class="item-info">
+            <div class="item-title">Butter Naan</div>
+            <div class="item-footer">
+              <div class="item-rating">
+                <span class="star">★</span>
+                <span>4.6</span>
+                <span>(10-15 min)</span>
+              </div>
+              <span class="item-price">₹45</span>
+            </div>
+            <div class="quantity-controls">
+              <button class="qty-btn" onclick="changeQuantity(4, -1)">−</button>
+              <div class="qty-display" id="qty-4">1</div>
+              <button class="qty-btn" onclick="changeQuantity(4, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-nav next" onclick="moveCarousel(1)">›</button>
+    </div>
+    <button class="request-dish-btn" onclick="openModal()">Request a Dish</button>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3>Request a Custom Dish</h3>
+      <form id="requestForm">
+        <div class="form-group">
+          <label for="dishName">Dish Name</label>
+          <input type="text" id="dishName" name="dishName" placeholder="Enter the dish name you'd like to request">
+        </div>
+        <div class="form-group">
+          <label for="customerName">Your Name</label>
+          <input type="text" id="customerName" name="customerName" placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+          <label for="description">Special Instructions</label>
+          <textarea id="description" name="description" placeholder="Any special requirements or cooking preferences..."></textarea>
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="button" class="btn-submit" onclick="submitRequest()">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 5;
+    let quantities = [1, 1, 1, 1, 1];
+
+    function moveCarousel(direction) {
+      const carousel = document.getElementById('carousel');
+      const items = carousel.children;
+      
+      // Remove center class from current item
+      items[currentSlide].classList.remove('center');
+      
+      // Update current slide
+      currentSlide += direction;
+      
+      // Handle wrap around
+      if (currentSlide >= totalSlides) {
+        currentSlide = 0;
+      } else if (currentSlide < 0) {
+        currentSlide = totalSlides - 1;
+      }
+      
+      // Add center class to new current item
+      items[currentSlide].classList.add('center');
+      
+      // Calculate transform
+      const itemWidth = 330; // 300px width + 30px margins
+      const offset = -(currentSlide * itemWidth) + (window.innerWidth / 2) - (itemWidth / 2);
+      
+      carousel.style.transform = `translateX(${offset}px)`;
+    }
+
+    function changeQuantity(itemIndex, change) {
+      quantities[itemIndex] += change;
+      if (quantities[itemIndex] < 1) {
+        quantities[itemIndex] = 1;
+      }
+      document.getElementById(`qty-${itemIndex}`).textContent = quantities[itemIndex];
+    }
+
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('active');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.classList.remove('modal-open');
+    }
+
+    function submitRequest() {
+      // Get form data (not stored anywhere as requested)
+      const formData = {
+        dishName: document.getElementById('dishName').value,
+        customerName: document.getElementById('customerName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        description: document.getElementById('description').value
+      };
+      
+      // Simple validation
+      if (!formData.dishName || !formData.customerName || !formData.email) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      // Show success message and close modal
+      alert('Thank you! Your dish request has been submitted successfully.');
+      
+      // Reset form
+      document.getElementById('requestForm').reset();
+      
+      // Close modal
+      closeModal();
+    }
+
+    // Initialize carousel position
+    window.addEventListener('load', function() {
+      moveCarousel(0);
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      moveCarousel(0);
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
